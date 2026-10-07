@@ -1,0 +1,57 @@
+{
+  "_readme": [
+    "Example rule set. The real one is private and is loaded from the path in CATEGORY_RULES_PATH.",
+    "The categories themselves are not defined here: they are read from the database on every run.",
+    "A rule only names the category it points to; if that name does not match exactly one leaf",
+    "category in the database, the run fails instead of guessing.",
+    "Patterns are regular expressions tested against the normalized bank concept",
+    "(lowercase, no accents, punctuation collapsed to single spaces). First matching rule wins.",
+    "aliasGroups: names the bank and the invoices use for the same supplier, for candidate matching.",
+    "promptHints: extra lines appended to the model instructions."
+  ],
+  "ignore": [
+    { "ruleId": "card_reload", "patterns": ["\\brecarga (?:de )?tarjeta\\b"] }
+  ],
+  "rules": [
+    {
+      "ruleId": "customer_refunds",
+      "category": "Customer refunds",
+      "patterns": ["\\btransferencia devoluciones\\b", "\\bdevoluciones clientes\\b"]
+    },
+    {
+      "ruleId": "bank_fees",
+      "category": "Bank fees",
+      "patterns": [
+        "^(?:comis|comision|comisiones)\\b",
+        "\\bgastos transferencia\\b",
+        "\\bfx charges for card\\b"
+      ]
+    },
+    {
+      "ruleId": "skytickets",
+      "category": "Flights/Hotels",
+      "patterns": ["\\bsky tickets\\b", "\\bskytickets\\b"]
+    },
+    {
+      "ruleId": "citytours",
+      "category": "Activities/Transfers",
+      "patterns": ["\\bcitytours\\b"]
+    },
+    {
+      "ruleId": "google_ads",
+      "category": "Online advertising",
+      "patterns": ["\\bgoogle ads\\b", "\\bgoogle ireland\\b"]
+    },
+    {
+      "ruleId": "self_employed_social_security",
+      "category": "Social security",
+      "allOf": ["\\btgss\\b", "\\bautonomos\\b"]
+    }
+  ],
+  "aliasGroups": [
+    ["sky tickets", "skytickets", "skt travel"]
+  ],
+  "promptHints": [
+    "Skytickets is always Flights/Hotels, never Activities/Transfers."
+  ]
+}
