@@ -1,0 +1,13 @@
+{
+  "name": "bank-reconciliation-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agent that categorises bank movements and reconciles them against payments and supplier invoices, extracted from the NomadFlight travel-agency platform",
+  "license": "MIT",
+  "scripts": {
+    "test": "node test/categoryRules.test.js && node test/historyClassifier.test.js && node test/reconciliation.test.js"
+  },
+  "dependencies": {
+    "openai": "^7.28.0"
+  }
+}
